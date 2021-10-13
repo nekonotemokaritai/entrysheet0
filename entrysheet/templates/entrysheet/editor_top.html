@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <h1 class="h1 text-primary">{{title}}</h1>
+        <p>{{message|safe}}</p>
+        <div class="row">
+            <h2 class="h2 text-primary col">セットリスト一覧</h2>
+            <p class="text-right col align-self-end">最終更新: {{setlist_update_dt|date:"Y/m/j H:i:s"}}</p>
+        </div>
+        <table class="table" style="word-break: break-all;">
+            <tr>
+                <th style="width: 3%">番号</th>
+                <th style="width: 20%">タイトル</th>
+                <th style="width: 3%">リンク</th>
+                <th style="width: 8%">Vo.</th>
+                <th style="width: 8%">Gt1</th>
+                <th style="width: 8%">Gt2</th>
+                <th style="width: 8%">Ba.</th>
+                <th style="width: 8%">Dr.</th>
+                <th style="width: 8%">Key</th>
+                <th style="width: 8%">他1</th>
+                <th style="width: 8%">他2</th>
+                <th style="width: 5%"></th>
+                <th style="width: 5%"></th>
+            </tr>
+            {% for item in data %}
+                {% if item.complete == True %}
+                <tr class="table-success">
+                {% else %}
+                <tr>
+                {% endif %}
+                    <td>{{item.number}}</td>
+                    <td>
+                        {% if item.artist != '' %}
+                            {{item.title}}<br>({{item.artist}})
+                        {% else %}
+                            {{item.title}}<br>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.link != '' %}
+                            <a href="{{item.link}}" target="_blank">動画</a>
+                        {% else %}
+                            <p>-</p>
+                        {% endif %}
+                    </td>
+                    <td>{{item.vocal.name}}</td>
+                    <td>{{item.guitar1.name}}</td>
+                    <td>{{item.guitar2.name}}</td>
+                    <td>{{item.bass.name}}</td>
+                    <td>{{item.drum.name}}</td>
+                    <td>{{item.keyboard.name}}</td>
+                    <td>{{item.other1.name}}</td>
+                    <td>{{item.other2.name}}</td>
+                    <td><a href ="{% url 'edit_setlist' item.id %}">編集</a></td>
+                    <td><a href ="{% url 'delete_setlist' item.id %}">削除</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <!-- ここからメンバー抽出フォーム追記 -->
+        <div class="row">
+            <form action="{% url 'editor_top' %}" method="post" class="form-inline">
+                {% csrf_token %}
+                <input type="hidden" name="mode" value="__member_filter_form__">
+                {{member_filter_form}}
+                <button class="btn btn-primary mx-2">選択した名前のあるものだけ抽出</button>
+            </form>
+            <p class="col h5 text-primary my-auto"><a href="{% url 'editor_top' %}">[抽出を解除]</a></p>
+        </div>
+        <!-- ここまで追記 -->
+        <p class="h5 text-primary mt-3"><a href="{% url 'add_setlist' %}">[セットリスト新規追加]</a></p>
+        <hr class="py-3">
+        <div class="row">
+            <h2 class="h2 text-primary col">参加メンバー一覧</h2>
+            <p class="text-right col align-self-end">最終更新: {{member_update_dt|date:"Y/m/j H:i:s"}}</p>
+        </div>
+        <table class="table">
+            <tr>
+                <th style="width: 10%"></th>
+                <th style="width: 10%">整理番号</th>
+                <th style="width: 25%">名前</th>
+                <th style="width: 10%"></th>
+                <th style="width: 10%"></th>
+                <th style="width: 35%"></th>
+            </tr>
+            {% for item in member_data %}
+                <tr>
+                    <td></td>
+                    <td>{{item.number}}</td>
+                    <td>{{item.name}}</td>
+                    <td><a href ="{% url 'edit_member' item.id %}">編集</a></td>
+                    <td><a href ="{% url 'delete_member' item.id %}">削除</a></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <p class="h5 text-primary"><a href="{% url 'add_member' %}">[メンバー新規追加]</a></p>
+    </body>
+</html>

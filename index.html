@@ -1,0 +1,37 @@
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>制作実習成果物まとめ</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <h1 class="mb-4 h1 text-primary">制作実習成果物まとめ</h1>
+        <h2 class="mt-2 h2 text-primary border-bottom">概要</h2>
+        <p>セッションや演奏会で演奏される曲と参加メンバーの一覧を編集するページを作成しました。<br>
+            管理者の使用する編集ページと、参加者が閲覧する表示ページはそれぞれ別のURLを用意しています。<br>
+            プラットフォームはDjangoを使用し、WEBサーバーはPythonanywhereを使用しています。<br>
+        </p>
+
+        <h2 class="mt-2 h2 text-primary border-bottom">編集ページ</h2>
+        <p class="h4"><a href="https://nekonotemokaritai.pythonanywhere.com/entrysheet/editor_top" target="_blank">[編集ページへのリンク]</a></p>
+        <p>こちらのページは管理者用のページです。<br>
+            管理者はまずこのページで参加者の名前を登録し、演奏する曲のリストを作成します。<br>
+            名前の登録は、画面の下側にある[メンバー新規追加]のリンクから行います。<br>
+            曲の追加は、画面中ほどの[セットリスト新規追加]のリンクから行います。<br>
+            曲、メンバーの一覧はいずれも整理番号の順に表示され、それぞれに対して編集と削除のリンクを設けています。<br>
+        </p>
+
+        <h2 class="mt-2 h2 text-primary border-bottom">表示ページ</h2>
+        <p class="h4"><a href="https://nekonotemokaritai.pythonanywhere.com/entrysheet/" target="_blank">[表示ページへのリンク]</a></p>
+        <p>こちらのページでは、編集ページで作成されたリストの一覧を表示するのみです。<br>
+            編集ページへのリンクは存在していませんので、編集権限のない人にはこのURLだけを通知するようにします。<br>
+        </p>
+
+        <h2 class="mt-2 h2 text-primary border-bottom">ソースコード</h2>
+        <!-- <p class="h4"><a href="https://github.com/nekonotemokaritai/entrysheet0" target="_blank">[ソースコードへのリンク]</a></p> -->
+        <p>ソースはGitHubにおいています。現状非公開にしています。<br>
+            Pythonanywhere（WEBサーバー）には、ここからソースコードを取り込むようにしました。<br>
+        </p>
+
+    </body>
+<html>

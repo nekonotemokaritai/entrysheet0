@@ -1,0 +1,19 @@
+
+マイグレーションファイルの関連付けを表示する
+py manage.py showmigrations entrysheet
+
+マイグレーションの関連付けをリセットする
+py manage.py migrate entrysheet zero
+
+この後、実際のマイグレーションファイル（0001_initial.py）を削除する
+
+マイグレーションの実行
+py manage.py makemigrations entrysheet
+py manage.py migrate
+
+
+データベースの内容をダンプしてバックアップをとる
+py manage.py dumpdata entrysheet > entrysheet.json
+
+バックアップをデータベースに反映する
+py manage.py loaddata entrysheet.json

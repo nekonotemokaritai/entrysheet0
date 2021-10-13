@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <h1 class="h1 text-primary">{{title}}</h1>
+        <p>{{message|safe}}</p>
+        <table class="table">
+            <tr><th>Number:</th><td>{{obj.number}}</td></tr>
+            <tr><th>Name:</th><td>{{obj.name}}</td></tr>
+            <form action="{% url 'delete_member' id %}" method="post">
+                {% csrf_token %}
+                <tr><th></th><td>
+                    <input type="submit" value="削除する" class="btn btn-primary">
+                </td></tr>
+            </form>
+        </table>
+    </body>
+</html>

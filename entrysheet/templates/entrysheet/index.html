@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    </head>
+    <body class="container-fluid">
+        <div class="row">
+            <h1 class="h1 text-primary col">{{title}}</h1>
+            <p class="col">{{message|safe}}</p>
+            <p class="text-right col align-self-end">最終更新: {{setlist_update_dt|date:"Y/m/j H:i:s"}}</p>
+        </div>
+        <table class="table">
+            <tr>
+                <th style="width: 3%">番号</th>
+                <th style="width: 22%">タイトル</th>
+                <th style="width: 3%">リンク</th>
+                <th style="width: 9%">Vo.</th>
+                <th style="width: 9%">Gt1</th>
+                <th style="width: 9%">Gt2</th>
+                <th style="width: 9%">Ba.</th>
+                <th style="width: 9%">Dr.</th>
+                <th style="width: 9%">Key</th>
+                <th style="width: 9%">他1</th>
+                <th style="width: 9%">他2</th>
+            </tr>
+            {% for item in data %}
+            {% if item.complete == True %}
+            <tr class="table-success">
+            {% else %}
+            <tr>
+            {% endif %}
+                <td>{{item.number}}</td>
+                <td>
+                    {% if item.artist != '' %}
+                        {{item.title}}<br>({{item.artist}})
+                    {% else %}
+                        {{item.title}}<br>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if item.link != '' %}
+                        <a href="{{item.link}}" target="_blank">動画</a>
+                    {% else %}
+                        <p>-</p>
+                    {% endif %}
+                </td>
+                <td>{{item.vocal.name}}</td>
+                <td>{{item.guitar1.name}}</td>
+                <td>{{item.guitar2.name}}</td>
+                <td>{{item.bass.name}}</td>
+                <td>{{item.drum.name}}</td>
+                <td>{{item.keyboard.name}}</td>
+                <td>{{item.other1.name}}</td>
+                <td>{{item.other2.name}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
